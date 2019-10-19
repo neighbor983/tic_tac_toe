@@ -49,3 +49,17 @@ def test_diagonal_winner_false():
     actual = b1.isThereAWinnerFromDiagonals()
     expected = False
     assert actual == expected, 'should return false when there is not win in a diagonal'
+
+
+def test_winner_true():
+    b1 = Board(['X', '-', '-', '-', 'X', '-', '-', '-', 'X'])
+    actual = b1.isThereAWinner()
+    expected = True
+    assert actual == expected, 'should return true when there is a win on the board'
+
+
+def test_winner_false():
+    b1 = Board(['X', '-', 'X', '-', '-', '-', '-', '-', '-'])
+    actual = b1.isThereAWinner()
+    expected = False
+    assert actual == expected, 'should return false when there is not win on the board'
