@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Board:
     def __init__(self, state=None):
         if state is None:
@@ -17,28 +20,28 @@ class Board:
     def __hash__(self):
         return ''.join(self.state)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         return (self.__class__ == other.__class__ and
                 self.state == other.state)
 
-    def isThereAWinner(self):
+    def isThereAWinner(self) -> bool:
         return self.isThereAWinnerFromRows() or self.isThereAWinnerFromCols() or self.isThereAWinnerFromDiagonals()
 
-    def isThereAWinnerFromRows(self):
+    def isThereAWinnerFromRows(self) -> bool:
         return (self.state[0] != '-' and self.state[0] == self.state[1] and self.state[1] == self.state[2]) or \
                (self.state[3] != '-' and self.state[3] == self.state[4] and self.state[4] == self.state[5]) or \
                (self.state[6] != '-' and self.state[6] == self.state[7] and self.state[7] == self.state[8])
 
-    def isThereAWinnerFromCols(self):
+    def isThereAWinnerFromCols(self) -> bool:
         return (self.state[0] != '-' and self.state[0] == self.state[3] and self.state[3] == self.state[6]) or \
                (self.state[1] != '-' and self.state[1] == self.state[4] and self.state[4] == self.state[7]) or \
                (self.state[2] != '-' and self.state[2] == self.state[5] and self.state[5] == self.state[8])
 
-    def isThereAWinnerFromDiagonals(self):
+    def isThereAWinnerFromDiagonals(self) -> bool:
         return (self.state[0] != '-' and self.state[0] == self.state[4] and self.state[4] == self.state[8]) or \
                (self.state[2] != '-' and self.state[2] == self.state[4] and self.state[4] == self.state[6])
 
-    def openSquares(self):
+    def openSquares(self) -> List[int]:
         return [i for i, x in enumerate(self.state) if x == '-']
 
     def setSquare(self, location: int, value: str):

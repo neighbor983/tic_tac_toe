@@ -1,4 +1,5 @@
 from board import Board
+from human_player import HumanPlayer
 
 sample_board = ['-', 'X', '-', '-', '-', '-', '-', '-', '-']
 
@@ -21,3 +22,6 @@ print(b4.isThereAWinner())
 print(b4.isThereAWinnerFromRows())
 print(b4.isThereAWinnerFromCols())
 print(b4.isThereAWinnerFromDiagonals())
+
+human = HumanPlayer()
+human.make_move(b1)
