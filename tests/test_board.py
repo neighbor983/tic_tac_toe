@@ -63,3 +63,17 @@ def test_winner_false():
     actual = b1.isThereAWinner()
     expected = False
     assert actual == expected, 'should return false when there is not win on the board'
+
+
+def test_whoIsWinner_no_winner():
+    b1 = Board(['X', '-', 'X', '-', '-', '-', '-', '-', '-'])
+    actual = b1.whoIsWinner()
+    expected = '-'
+    assert actual == expected, 'should return - when there is no winner'
+
+
+def test_whoIsWinner_X():
+    b1 = Board(['X', 'X', 'X', '-', '-', '-', '-', '-', '-'])
+    actual = b1.whoIsWinner()
+    expected = 'X'
+    assert actual == expected, 'should return X when X player is the winner'

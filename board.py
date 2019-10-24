@@ -51,3 +51,30 @@ class Board:
 
     def reset(self):
         return Board(state=None)
+
+    def whoIsWinner(self) -> str:
+        if (self.state[0] != '-' and self.state[0] == self.state[1] and self.state[1] == self.state[2]):
+            return self.state[0]
+
+        if (self.state[3] != '-' and self.state[3] == self.state[4] and self.state[4] == self.state[5]):
+            return self.state[3]
+
+        if (self.state[6] != '-' and self.state[6] == self.state[7] and self.state[7] == self.state[8]):
+            return self.state[6]
+
+        if (self.state[0] != '-' and self.state[0] == self.state[3] and self.state[3] == self.state[6]):
+            return self.state[0]
+
+        if (self.state[1] != '-' and self.state[1] == self.state[4] and self.state[4] == self.state[7]):
+            return self.state[1]
+
+        if (self.state[2] != '-' and self.state[2] == self.state[5] and self.state[5] == self.state[8]):
+            return self.state[2]
+
+        if (self.state[0] != '-' and self.state[0] == self.state[4] and self.state[4] == self.state[8]):
+            return self.state[0]
+
+        if (self.state[2] != '-' and self.state[2] == self.state[4] and self.state[4] == self.state[6]):
+            return self.state[2]
+
+        return '-'
