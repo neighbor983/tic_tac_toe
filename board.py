@@ -20,6 +20,9 @@ class Board:
     def __hash__(self):
         return ''.join(self.state)
 
+    def get_hash(self):
+        return ''.join(self.state)
+
     def __eq__(self, other) -> bool:
         return (self.__class__ == other.__class__ and
                 self.state == other.state)

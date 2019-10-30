@@ -2,6 +2,9 @@ from board import Board
 from human_player import HumanPlayer
 import random
 import pickle
+from q_tabular_player import QTabularPlayer
+from game import Game
+from collections import Counter
 
 
 # sample_board = ['-', 'X', '-', '-', '-', '-', '-', '-', '-']
@@ -50,52 +53,60 @@ def create_q_table_pickle_file(filename):
                                     h1 = possible_values[h]
                                     for i in range(len(possible_values)):
                                         i1 = possible_values[i]
+                                        key_array = [str(a1), str(b1), str(c1), str(d1), str(e1), str(f1), str(g1), str(
+                                            h1), str(i1)]
                                         key = str(a1) + str(b1) + str(c1) + str(d1) + str(e1) + str(f1) + str(g1) + str(
                                             h1) + str(i1)
 
+                                        freq_map = Counter(key_array)
+                                        ones = freq_map['1']
+                                        minus_ones = freq_map['-1']
+                                        if abs(int(ones) - int(minus_ones)) > 1:
+                                            continue
+
                                         actions = []
                                         if a1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if b1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if c1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if d1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if e1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if f1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if g1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if h1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
                                         if i1 == 0:
-                                            actions.append(random.random())
+                                            actions.append(0)
                                         else:
                                             actions.append(-1)
 
@@ -107,20 +118,48 @@ def create_q_table_pickle_file(filename):
 
 q_pickle_filename = 'QTabularPlayer.p'
 
+# create_q_table_pickle_file(q_pickle_filename)
 
-with open(q_pickle_filename, 'rb') as file:
-    data = pickle.load(file)
-
+# with open(q_pickle_filename, 'rb') as file:
+#     data = pickle.load(file)
 #
-# #q_table = pickle.load(open(q_pickle_filename))
-empty_board = '000000000'
-actions_array = data[empty_board]
-print(','.join([str(x) for x in actions_array]))
+# #
+# # #q_table = pickle.load(open(q_pickle_filename))
+# empty_board = '000000000'
+# actions_array = data[empty_board]
+# print(','.join([str(x) for x in actions_array]))
+#
+# full_board = '111111111'
+# actions_array = data[full_board]
+# print(','.join([str(x) for x in actions_array]))
+#
+# full_board = '-11-110001-1'
+# actions_array = data[full_board]
+# print(','.join([str(x) for x in actions_array]))
 
-full_board = '111111111'
-actions_array = data[full_board]
-print(','.join([str(x) for x in actions_array]))
 
-full_board = '-11-110001-1'
-actions_array = data[full_board]
-print(','.join([str(x) for x in actions_array]))
+for _ in range(10):
+
+    p1 = QTabularPlayer(symbol='X')
+    p2 = QTabularPlayer(symbol='O')
+
+    g = Game(player_1=p1, player_2=p2)
+
+    g.start()
+
+
+# p1 = HumanPlayer(symbol='X')
+# p2 = QTabularPlayer(symbol='O')
+#
+# g = Game(player_1=p1, player_2=p2)
+# g.start()
+# p1 = QTabularPlayer(symbol='X')
+# del p1.learned_q['111110110']
+# del p1.learned_q['111110111']
+# del p1.learned_q['111111-1-1-1']
+#
+#
+# p1.save_qs()
+# p2 = QTabularPlayer(symbol='X')
+# print(f'qs: {p2.learned_q}')
+print(f'q table: {p1.learned_q}')

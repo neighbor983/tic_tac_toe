@@ -10,6 +10,7 @@ class HumanPlayer(Player):
 
     def make_move(self, board: Board) -> int:
         available_squares = board.openSquares()
+        print(board)
         while True:
             selected_value = get_selected_value(available_squares=available_squares)
 
@@ -30,13 +31,17 @@ class HumanPlayer(Player):
                 print("Error!, you did not input an integer. Please try again.")
             else:
                 break
+
         return int_selected_value
 
     def set_symbol(self, symbol):
         self.symbol = symbol
 
+    def update_reward(self, reward):
+        pass
 
 def get_selected_value(available_squares: List[int]):
     return input(
         "Select an open square from the following choices " + ','.join(
-            [str(x) for x in available_squares]) + " :")
+            [str(x) for x in available_squares]) + " : ")
+
